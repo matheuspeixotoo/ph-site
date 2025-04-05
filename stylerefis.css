@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(150deg, rgb(51, 51, 51), rgb(96, 96, 96));
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -50px;
+}
+
+.logo img {
+  width: 500px;
+}
+
+/* Título Principal */
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* Container dos Produtos */
+.product-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+}
+
+/* Cartão de Produto */
+.product-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: left;
+  transition: 0.3s;
+  margin-bottom: 20px;
+}
+
+.product-card:hover {
+  transform: scale(1.03);
+}
+
+/* Imagem do Produto */
+.product-card img {
+  width: 320px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+/* Informações do Produto */
+.product-info {
+  flex: 1;
+}
+
+.product-info h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #ff4500; /* Cor vibrante para título */
+}
+
+.product-info ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.product-info li {
+  font-size: 16px;
+  padding: 3px 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .product-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .product-card img {
+    margin-right: 0;
+    margin-bottom: 15px;
+    width: 100px;
+  }
+}
+
+.whatsapp-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.whatsapp-button img {
+  width: 120px;
+  height: 120px;
+}
