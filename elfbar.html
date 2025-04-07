@@ -27,61 +27,8 @@
       <img src="./Assets/whatsapp-icon.png" alt="WhatsApp" />
     </a>
 
-    <!-- Script para puxar dados do Google Sheets -->
-    <script>
-      const sheetURL =
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQG7xPPn-bd5_AUSvYfywduL3bquyp1PyshYGCjkIsNejft-8CmLeECG5Ih2s-zodDGctv9glmS19jd/pub?output=csv";
-
-      async function fetchProducts() {
-        const response = await fetch(sheetURL);
-        const data = await response.text();
-        const rows = data.split("\n").slice(1); // remove cabeçalho
-
-        const container = document.getElementById("product-container");
-        container.innerHTML = "";
-
-        const produtosPorNome = {};
-
-        rows.forEach((row) => {
-          const [marca, produto, preco, imagem, sabor] = row.split(",");
-
-          if (marca.trim().toUpperCase() === "ELFBAR") {
-            const key = produto + preco + imagem;
-
-            if (!produtosPorNome[key]) {
-              produtosPorNome[key] = {
-                nome: produto,
-                preco: preco,
-                imagem: imagem,
-                sabores: [],
-              };
-            }
-
-            if (sabor && !produtosPorNome[key].sabores.includes(sabor.trim())) {
-              produtosPorNome[key].sabores.push(sabor.trim());
-            }
-          }
-        });
-
-        Object.values(produtosPorNome).forEach((produto) => {
-          const card = document.createElement("div");
-          card.className = "product-card";
-
-          card.innerHTML = `
-            <img src="${produto.imagem}" alt="${produto.nome}" />
-            <div class="product-info">
-              <h2>${produto.nome} - R$${produto.preco}</h2>
-              <ul>
-                ${produto.sabores.map((s) => `<li>${s}</li>`).join("")}
-              </ul>
-            </div>
-          `;
-
-          container.appendChild(card);
-        });
-      }
-
-      fetchProducts();
-    </script>
+    <!-- Bibliotecas e Script JS -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
