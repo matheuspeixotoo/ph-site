@@ -1,80 +1,63 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const sheetURL =
-    "https://docs.google.com/spreadsheets/d/19-10J3hzmvWuBKxFDoM6mcpkbT1jKFxl6CMIhNPeRFE/gviz/tq?tqx=out:csv";
+  const container = document.getElementById("product-container");
 
-  Papa.parse(sheetURL, {
-    download: true,
-    header: true,
-    complete: function (results) {
-      const data = results.data;
-      const container = document.getElementById("product-container");
+  Papa.parse(
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQG7xPPn-bd5_AUSvYfywduL3bquyp1PyshYGCjkIsNejft-8CmLeECG5Ih2s-zodDGctv9glmS19jd/pub?output=csv",
+    {
+      download: true,
+      header: true,
+      complete: (results) => {
+        const data = results.data;
 
-      data.forEach((item) => {
-        if (
-          item["Marca"] &&
-          item["Produto"] &&
-          item["Preço"] &&
-          item["Imagem"] &&
-          item["Sabor"]
-        ) {
+        // Log pra verificar o que tá vindo
+        console.log("Dados recebidos da planilha:", data);
+
+        // Filtrar apenas ELFBAR
+        const elfbarProducts = data.filter(
+          (item) => item.Marca?.trim() === "ELFBAR"
+        );
+
+        elfbarProducts.forEach((item) => {
           const card = document.createElement("div");
-          card.className = "product-card";
+          card.classList.add("product-card");
+
+          // Corrigir nome da coluna se necessário
+          const imagemNome = item.Imagem?.trim();
+          const saboresTexto = item.Sabor?.trim();
 
           const image = document.createElement("img");
-          image.src = item["Imagem"];
-          image.alt = item["Produto"];
+          image.src = `./Assets/${imagemNome}`;
+          image.alt = item.Produto;
 
           const info = document.createElement("div");
-          info.className = "product-info";
+          info.classList.add("product-info");
+
+          // Formatar preço
+          const precoFormatado = `R$${parseFloat(item.Preço)
+            .toFixed(2)
+            .replace(".", ",")}`;
 
           const title = document.createElement("h2");
-          title.textContent = `${item["Produto"]} - R$${item["Preço"]}`;
+          title.textContent = `${item.Produto} - ${precoFormatado}`;
 
-          const flavorList = document.createElement("ul");
-          const sabores = item["Sabor"].split(",").map((s) => s.trim());
-          sabores.forEach((sabor) => {
-            const li = document.createElement("li");
-            li.textContent = sabor;
-            flavorList.appendChild(li);
-          });
+          const saborList = document.createElement("ul");
+
+          if (saboresTexto) {
+            const sabores = saboresTexto.split(",").map((s) => s.trim());
+            sabores.forEach((sabor) => {
+              const li = document.createElement("li");
+              li.textContent = sabor;
+              saborList.appendChild(li);
+            });
+          }
 
           info.appendChild(title);
-          info.appendChild(flavorList);
+          info.appendChild(saborList);
           card.appendChild(image);
           card.appendChild(info);
           container.appendChild(card);
-        }
-      });
-    },
-  });
+        });
+      },
+    }
+  );
 });
-
-function createProductCard(produto, preco, imagem, sabores) {
-  const card = document.createElement("div");
-  card.className = "product-card";
-
-  const img = document.createElement("img");
-  img.src = imagem;
-  img.alt = produto;
-
-  const info = document.createElement("div");
-  info.className = "product-info";
-
-  const title = document.createElement("h2");
-  title.textContent = `${produto} - R$ ${preco}`;
-
-  const saborList = document.createElement("ul");
-  sabores.split(",").forEach((sabor) => {
-    const li = document.createElement("li");
-    li.textContent = sabor.trim();
-    saborList.appendChild(li);
-  });
-
-  info.appendChild(title);
-  info.appendChild(saborList);
-
-  card.appendChild(img);
-  card.appendChild(info);
-
-  return card;
-}
