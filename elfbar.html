@@ -3,87 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PH OFICIAL - ELFBAR</title>
+    <title>ELFBAR</title>
     <link rel="stylesheet" href="styleelfbar.css" />
   </head>
   <body>
-    <!-- Logo Centralizada -->
     <div class="logo">
       <img id="phlogo" src="./Assets/phlogo.png" alt="Logo PH" />
     </div>
 
-    <!-- Título da Página -->
     <h1 class="page-title">Sabores Disponíveis - ELFBAR</h1>
 
-    <!-- Lista de Produtos -->
-    <div class="product-container">
-      <!-- ELFBAR 40MIL -->
-      <div class="product-card">
-        <img src="./Assets/elfbar40k.jpg" alt="ELFBAR 40MIL" />
-        <div class="product-info">
-          <h2>ELFBAR 40MIL - R$150,00</h2>
-          <ul>
-            <li>Tiger’s Blood</li>
-            <li>Pêssego</li>
-            <li>Baja Splash</li>
-            <li>Double Apple Ice</li>
-            <li>Maçã Verde</li>
-            <li>Morango Ice</li>
-            <li>Miami Mint</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- ELFBAR 30MIL -->
-      <div class="product-card">
-        <img src="./Assets/elfbar30k.png" alt="ELFBAR 30MIL" />
-        <div class="product-info">
-          <h2>ELFBAR 30MIL - R$130,00</h2>
-          <ul>
-            <li>Bubballo Tutti Frutti</li>
-            <li>Cherry Strazz</li>
-            <li>Morango Ice</li>
-            <li>Dragon Strawnana</li>
-            <li>Maçã Verde</li>
-            <li>Miami Mint</li>
-            <li>Strawmelon Pêssego</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- ELFBAR 25MIL -->
-      <div class="product-card">
-        <img src="./Assets/elfbar25k.png" alt="ELFBAR 25MIL" />
-        <div class="product-info">
-          <h2>ELFBAR 25MIL - R$125,00</h2>
-          <ul>
-            <li>Alpine Mint</li>
-            <li>Pêssego Berry</li>
-            <li>Blueberry & Raspberry</li>
-            <li>Manga, Pêssego e Melancia</li>
-            <li>Watermelon Bubble Gum</li>
-            <li>Manga</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- ELFBAR 23MIL -->
-      <div class="product-card">
-        <img src="./Assets/elfbar23k.jpeg" alt="ELFBAR 23MIL" />
-        <div class="product-info">
-          <h2>ELFBAR 23MIL - R$120,00</h2>
-          <ul>
-            <li>Blueberry Pear</li>
-            <li>Ice Mint</li>
-            <li>Sakura Grape</li>
-            <li>Morango e Banana</li>
-            <li>Baja Splash</li>
-            <li>Maçã Verde</li>
-            <li>Blue Razz Ice</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div class="product-container" id="product-container"></div>
 
     <a
       href="https://wa.me/+5561984160056"
@@ -92,5 +22,8 @@
     >
       <img src="./Assets/whatsapp-icon.png" alt="WhatsApp" />
     </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="./Script.js"></script>
   </body>
 </html>
