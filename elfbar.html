@@ -3,32 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ELFBAR</title>
-    <link rel="stylesheet" href="styleelfbar.css" />
+    <title>Produtos Elfbar</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f7f7f7;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        width: 250px;
+        padding: 15px;
+        text-align: center;
+      }
+
+      .card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      .marca {
+        font-weight: bold;
+        color: #ff4d4d;
+        margin-bottom: 5px;
+      }
+
+      .produto {
+        font-size: 18px;
+        margin: 5px 0;
+      }
+
+      .preco {
+        font-size: 16px;
+        color: green;
+        margin: 5px 0;
+      }
+
+      .sabor {
+        font-size: 14px;
+        color: #555;
+      }
+    </style>
   </head>
   <body>
-    <!-- Logo Centralizada -->
-    <div class="logo">
-      <img id="phlogo" src="./Assets/phlogo.png" alt="Logo PH" />
-    </div>
+    <h1>Lista de Produtos Elfbar</h1>
+    <div class="container" id="produtos"></div>
 
-    <!-- Título da Página -->
-    <h1 class="page-title">Sabores Disponíveis - ELFBAR</h1>
+    <script>
+      const sheetUrl =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQG7xPPn-bd5_AUSvYfywduL3bquyp1PyshYGCjkIsNejft-8CmLeECG5Ih2s-zodDGctv9glmS19jd/pub?gid=0&single=true&output=csv";
 
-    <!-- Produtos virão aqui via JS -->
-    <div class="product-container" id="product-container"></div>
+      Papa.parse(sheetUrl, {
+        download: true,
+        header: true,
+        complete: function (results) {
+          const data = results.data;
+          const container = document.getElementById("produtos");
 
-    <!-- Botão WhatsApp -->
-    <a
-      href="https://wa.me/+5561984160056"
-      class="whatsapp-button"
-      target="_blank"
-    >
-      <img src="./Assets/whatsapp-icon.png" alt="WhatsApp" />
-    </a>
+          data.forEach((item) => {
+            if (!item.Produto || !item.Imagem) return; // ignora linhas vazias
 
-    <!-- PapaParse e Script -->
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-    <script src="./script.js"></script>
+            const card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `
+            <img src="${item.Imagem.trim()}" alt="${item.Produto}">
+            <div class="marca">${item.Marca}</div>
+            <div class="produto">${item.Produto}</div>
+            <div class="preco">R$ ${item.Preço}</div>
+            <div class="sabor">${item.Sabor}</div>
+          `;
+            container.appendChild(card);
+          });
+        },
+      });
+    </script>
   </body>
 </html>
