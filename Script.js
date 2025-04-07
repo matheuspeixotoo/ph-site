@@ -9,51 +9,56 @@ document.addEventListener("DOMContentLoaded", function () {
         header: true,
         skipEmptyLines: true,
         complete: function (results) {
-          const data = results.data;
-          const container = document.getElementById("product-container");
+          const products = results.data;
 
-          // Filtra apenas produtos da marca ELFBAR
-          const elfbarProducts = data.filter(
-            (item) => item.Marca && item.Marca.toLowerCase() === "elfbar"
+          // Filtro para apenas os produtos da ELFBAR
+          const elfbarProducts = products.filter(
+            (p) => p.Marca.trim().toLowerCase() === "elfbar"
           );
 
-          elfbarProducts.forEach((item) => {
-            const card = document.createElement("div");
-            card.className = "product-card";
+          const container = document.querySelector(".product-container");
+          container.innerHTML = ""; // Limpa os antigos
 
-            // Criação da imagem
-            const img = document.createElement("img");
-            img.src = item.Imagem;
-            img.alt = item.Produto;
-            card.appendChild(img);
-
-            // Informações do produto
-            const info = document.createElement("div");
-            info.className = "product-info";
-
-            const title = document.createElement("h2");
-            title.textContent = `${item.Produto} - R$${item.Preço}`;
-            info.appendChild(title);
-
-            // Lista de sabores
-            const ul = document.createElement("ul");
-            if (item.Sabor) {
-              const sabores = item.Sabor.split(",").map((s) => s.trim());
-              sabores.forEach((sabor) => {
-                const li = document.createElement("li");
-                li.textContent = sabor;
-                ul.appendChild(li);
-              });
-            }
-
-            info.appendChild(ul);
-            card.appendChild(info);
+          elfbarProducts.forEach((prod) => {
+            const card = createProductCard(
+              prod.Produto,
+              prod.Preço,
+              prod.Imagem,
+              prod.Sabor
+            );
             container.appendChild(card);
           });
         },
       });
-    })
-    .catch((error) => {
-      console.error("Erro ao carregar a planilha:", error);
     });
 });
+
+function createProductCard(produto, preco, imagem, sabores) {
+  const card = document.createElement("div");
+  card.className = "product-card";
+
+  const img = document.createElement("img");
+  img.src = imagem;
+  img.alt = produto;
+
+  const info = document.createElement("div");
+  info.className = "product-info";
+
+  const title = document.createElement("h2");
+  title.textContent = `${produto} - R$ ${preco}`;
+
+  const saborList = document.createElement("ul");
+  sabores.split(",").forEach((sabor) => {
+    const li = document.createElement("li");
+    li.textContent = sabor.trim();
+    saborList.appendChild(li);
+  });
+
+  info.appendChild(title);
+  info.appendChild(saborList);
+
+  card.appendChild(img);
+  card.appendChild(info);
+
+  return card;
+}
