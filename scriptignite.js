@@ -1,38 +1,28 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const csvUrl =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQKZXxrZJ45cmYrlNW2c06fxTZ9v8wKEJjNvj06zfP1g4Z3i9kbZ5raOw8aDWqo5jyChd7pg9tAEw3/pub?gid=997013394&single=true&output=csv";
-  const container = document.querySelector(".product-container");
+const url =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQKZXxrZJ45cmYrlNW2c06fxTZ9v8wKEJjNvj06zfP1g4Z3i9kbZ5raOw8aDWqo5jyChd7pg9tAEw3/pub?gid=997013394&single=true&output=csv";
 
-  fetch(csvUrl)
-    .then((response) => response.text())
-    .then((csvText) => {
-      const rows = csvText.split("\n").slice(1); // ignora cabeçalho
-      rows.forEach((row) => {
-        const [marca, produto, preco, imagem, sabor] = row.split(",");
+fetch(url)
+  .then((response) => response.text())
+  .then((csv) => {
+    const linhas = csv.trim().split("\n").slice(1); // Ignora cabeçalho
+    const container = document.getElementById("produtos");
 
-        // Evita processar linhas vazias
-        if (!produto || !preco || !imagem || !sabor) return;
+    linhas.forEach((linha) => {
+      const [sabor, preco, imagem] = linha.split(",");
+      const precoLimpo = preco.replace(/"/g, ""); // Remove aspas
 
-        const productCard = document.createElement("div");
-        productCard.className = "product-card";
+      const card = document.createElement("div");
+      card.className = "card";
 
-        productCard.innerHTML = `
-            <img src="${imagem.trim()}" alt="${produto.trim()}" />
-            <div class="product-info">
-              <h2>${produto.trim()} - ${preco.trim()}</h2>
-              <ul>
-                ${sabor
-                  .split(";")
-                  .map((s) => `<li>${s.trim()}</li>`)
-                  .join("")}
-              </ul>
-            </div>
-          `;
+      card.innerHTML = `
+        <img src="assets/${imagem.trim()}" alt="${sabor}" />
+        <h2>${sabor} - R$ ${precoLimpo}</h2>
+        <p>${imagem.trim()}</p>
+      `;
 
-        container.appendChild(productCard);
-      });
-    })
-    .catch((error) => {
-      console.error("Erro ao carregar os dados:", error);
+      container.appendChild(card);
     });
-});
+  })
+  .catch((error) => {
+    console.error("Erro ao carregar dados:", error);
+  });
