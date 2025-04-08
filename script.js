@@ -1,74 +1,55 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("product-container");
+// Pega o nome da marca diretamente do título da página
+const titulo = document.querySelector(".page-title").textContent;
+const marcaAtual = titulo.split(" - ")[1]?.trim()?.toUpperCase();
 
-  Papa.parse(
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQG7xPPn-bd5_AUSvYfywduL3bquyp1PyshYGCjkIsNejft-8CmLeECG5Ih2s-zodDGctv9glmS19jd/pub?output=csv",
-    {
-      download: true,
-      header: true,
-      complete: (results) => {
-        const data = results.data;
+const container = document.getElementById("product-container");
 
-        // Filtrar apenas produtos ELFBAR
-        const elfbarProducts = data.filter(
-          (item) => item.Marca?.trim().toUpperCase() === "ELFBAR"
-        );
+Papa.parse(
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vS9CRwzTFu5Eea3mMI3A8O4kqlZ-dQoT_3vbX6AVvOAn4e2MNreYRI-PhlE-y-1VQ/pub?gid=0&single=true&output=csv",
+  {
+    download: true,
+    header: true,
+    complete: function (results) {
+      const produtos = results.data;
 
-        // Agrupar por produto + imagem + preço
-        const agrupados = {};
+      const produtosFiltrados = produtos.filter(
+        (produto) => produto.Marca?.toUpperCase() === marcaAtual
+      );
 
-        elfbarProducts.forEach((item) => {
-          const key = `${item.Produto}|${item.Preço}|${item.Imagem}`;
-          if (!agrupados[key]) {
-            agrupados[key] = {
-              nome: item.Produto,
-              preco: item.Preço,
-              imagem: item.Imagem,
-              sabores: [],
-            };
-          }
+      produtosFiltrados.forEach((produto) => {
+        const card = document.createElement("div");
+        card.classList.add("product-card");
 
-          if (item.Sabor) {
-            const saboresIndividuais = item.Sabor.split(",").map((s) =>
-              s.trim()
-            );
-            agrupados[key].sabores.push(...saboresIndividuais);
-          }
-        });
+        // Imagem do produto
+        const imagem = document.createElement("img");
+        imagem.src = `./Assets/${produto.Imagem}`;
+        imagem.alt = produto.Modelo;
 
-        Object.values(agrupados).forEach((produto) => {
-          const card = document.createElement("div");
-          card.classList.add("product-card");
+        // Informações do produto
+        const info = document.createElement("div");
+        info.classList.add("product-info");
 
-          const image = document.createElement("img");
-          image.src = `./Assets/${produto.imagem}`;
-          image.alt = produto.nome;
+        const titulo = document.createElement("h2");
+        titulo.textContent = `${produto.Modelo} - R$ ${produto.Preço}`;
 
-          const info = document.createElement("div");
-          info.classList.add("product-info");
+        const lista = document.createElement("ul");
 
-          const precoFormatado = `R$${parseFloat(produto.preco)
-            .toFixed(2)
-            .replace(".", ",")}`;
-          const title = document.createElement("h2");
-          title.textContent = `${produto.nome} - ${precoFormatado}`;
-
-          const saborList = document.createElement("ul");
-          const saboresUnicos = [...new Set(produto.sabores)];
-
-          saboresUnicos.forEach((sabor) => {
+        if (produto.Sabores && produto.Sabores.trim() !== "") {
+          const saboresSeparados = produto.Sabores.split(",");
+          saboresSeparados.forEach((sabor) => {
             const li = document.createElement("li");
-            li.textContent = sabor;
-            saborList.appendChild(li);
+            li.textContent = sabor.trim();
+            lista.appendChild(li);
           });
+        }
 
-          info.appendChild(title);
-          info.appendChild(saborList);
-          card.appendChild(image);
-          card.appendChild(info);
-          container.appendChild(card);
-        });
-      },
-    }
-  );
-});
+        info.appendChild(titulo);
+        info.appendChild(lista);
+
+        card.appendChild(imagem);
+        card.appendChild(info);
+        container.appendChild(card);
+      });
+    },
+  }
+);
