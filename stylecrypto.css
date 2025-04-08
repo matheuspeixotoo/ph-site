@@ -30,14 +30,12 @@ body {
   width: 500px;
 }
 
-/* Título Principal */
 .page-title {
   font-size: 28px;
   font-weight: bold;
   margin: 20px 0;
 }
 
-/* Container dos Produtos */
 .product-container {
   display: flex;
   flex-direction: column;
@@ -47,7 +45,6 @@ body {
   padding: 20px;
 }
 
-/* Cartão de Produto */
 .product-card {
   display: flex;
   align-items: center;
@@ -67,7 +64,6 @@ body {
   transform: scale(1.03);
 }
 
-/* Imagem do Pod */
 .product-card img {
   width: 360px;
   height: auto;
@@ -75,7 +71,6 @@ body {
   border-radius: 10px;
 }
 
-/* Informações do Produto */
 .product-info {
   flex: 1;
 }
@@ -96,7 +91,6 @@ body {
   padding: 3px 0;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .product-card {
     flex-direction: column;
@@ -111,7 +105,6 @@ body {
   }
 }
 
-/* Botão WhatsApp */
 .whatsapp-button {
   position: fixed;
   bottom: 20px;
