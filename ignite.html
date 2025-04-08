@@ -1,21 +1,34 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PH Pods - Ignite</title>
+    <title>PH OFICIAL - IGNITE</title>
     <link rel="stylesheet" href="styleignite.css" />
   </head>
   <body>
-    <div class="container">
-      <img src="Assets/phlogo.png" alt="Logo PH" class="logo" />
-      <h1 class="titulo">Sabores Disponíveis - IGNITE</h1>
-      <div id="produtos" class="produtos"></div>
-      <a class="whatsapp" href="https://wa.me/SEUNUMERO" target="_blank">
-        <img src="Assets/whatsapp-icon.png" alt="WhatsApp" />
-      </a>
+    <!-- Logo Centralizada -->
+    <div class="logo">
+      <img id="phlogo" src="./Assets/phlogo.png" alt="Logo PH" />
     </div>
 
+    <!-- Título da Página -->
+    <h1 class="page-title">Sabores Disponíveis - IGNITE</h1>
+
+    <!-- Lista de Produtos Dinâmica -->
+    <div class="product-section" id="product-container"></div>
+
+    <!-- Botão WhatsApp -->
+    <a
+      href="https://wa.me/+5561984160056"
+      class="whatsapp-button"
+      target="_blank"
+    >
+      <img src="./Assets/whatsapp-icon.png" alt="WhatsApp" />
+    </a>
+
+    <!-- Bibliotecas e Script JS -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <script src="scriptignite.js"></script>
   </body>
 </html>

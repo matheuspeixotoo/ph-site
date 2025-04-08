@@ -1,28 +1,65 @@
-const url =
+const spreadsheetURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQKZXxrZJ45cmYrlNW2c06fxTZ9v8wKEJjNvj06zfP1g4Z3i9kbZ5raOw8aDWqo5jyChd7pg9tAEw3/pub?gid=997013394&single=true&output=csv";
 
-fetch(url)
+fetch(spreadsheetURL)
   .then((response) => response.text())
-  .then((csv) => {
-    const linhas = csv.trim().split("\n").slice(1); // Ignora cabeçalho
-    const container = document.getElementById("produtos");
+  .then((csvText) => {
+    const data = Papa.parse(csvText, { header: true }).data;
+    const container = document.getElementById("product-container");
 
-    linhas.forEach((linha) => {
-      const [sabor, preco, imagem] = linha.split(",");
-      const precoLimpo = preco.replace(/"/g, ""); // Remove aspas
+    // Agrupa por Produto + Preço + Imagem
+    const produtos = {};
 
+    data.forEach((item) => {
+      const key = `${item.Produto}|${item.Preço}|${item.Imagem}`;
+      if (!produtos[key]) {
+        produtos[key] = {
+          produto: item.Produto,
+          preco: item.Preço,
+          imagem: item.Imagem,
+          sabores: [],
+        };
+      }
+
+      if (item.Sabor) {
+        const sabores = item.Sabor.split(",").map((s) => s.trim());
+        produtos[key].sabores.push(...sabores);
+      }
+    });
+
+    // Monta os cards
+    Object.values(produtos).forEach((produto) => {
       const card = document.createElement("div");
-      card.className = "card";
+      card.className = "product-card";
 
-      card.innerHTML = `
-        <img src="Assets/${imagem.trim()}" alt="${sabor}" />
-        <h2>${sabor} - R$ ${precoLimpo}</h2>
-        <p>${imagem.trim()}</p>
-      `;
+      const img = document.createElement("img");
+      img.src = `./Assets/${produto.imagem}`;
+      img.alt = produto.produto;
+
+      const info = document.createElement("div");
+      info.className = "product-info";
+
+      const preco = `R$${parseFloat(produto.preco)
+        .toFixed(2)
+        .replace(".", ",")}`;
+      const titulo = document.createElement("h2");
+      titulo.textContent = `${produto.produto} - ${preco}`;
+
+      const lista = document.createElement("ul");
+      const saboresUnicos = [...new Set(produto.sabores)];
+      saboresUnicos.forEach((sabor) => {
+        const li = document.createElement("li");
+        li.textContent = sabor;
+        lista.appendChild(li);
+      });
+
+      info.appendChild(titulo);
+      info.appendChild(lista);
+
+      card.appendChild(img);
+      card.appendChild(info);
 
       container.appendChild(card);
     });
   })
-  .catch((error) => {
-    console.error("Erro ao carregar dados:", error);
-  });
+  .catch((err) => console.error("Erro ao carregar dados da planilha:", err));
