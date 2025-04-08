@@ -15,7 +15,7 @@ fetch(url)
       card.className = "card";
 
       card.innerHTML = `
-        <img src="assets/${imagem.trim()}" alt="${sabor}" />
+        <img src="Assets/${imagem.trim()}" alt="${sabor}" />
         <h2>${sabor} - R$ ${precoLimpo}</h2>
         <p>${imagem.trim()}</p>
       `;
