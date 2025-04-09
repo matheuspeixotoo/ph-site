@@ -79,3 +79,40 @@ body {
   width: 120px;
   height: 120px;
 }
+
+@media (max-width: 768px) {
+  .logo img {
+    width: 300px;
+    margin-top: 20px;
+  }
+
+  .button-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .button {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .button img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .whatsapp-button {
+    bottom: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .whatsapp-button img {
+    width: 80px;
+    height: 80px;
+  }
+}
