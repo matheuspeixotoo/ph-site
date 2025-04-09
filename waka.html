@@ -4,43 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PH OFICIAL - WAKA</title>
-    <link rel="stylesheet" href="stylewaka.css" />
+    <link rel="stylesheet" href="stylecrypto.css" />
   </head>
   <body>
-    <!-- Logo Centralizada -->
     <div class="logo">
       <img id="phlogo" src="./Assets/phlogo.png" alt="Logo PH" />
     </div>
 
-    <!-- Título da Página -->
     <h1 class="page-title">Sabores Disponíveis - WAKA</h1>
 
-    <!-- Lista de Produtos -->
-    <div class="product-container">
-      <!-- WAKA 30MIL -->
-      <div class="product-card">
-        <img src="./Assets/waka30k.png" alt="WAKA 30MIL" />
-        <div class="product-info">
-          <h2>WAKA 30MIL PUFFS - R$120,00</h2>
-          <ul>
-            <li>Sour Blueberry Raspberry Ice</li>
-            <li>Icy Mojito</li>
-            <li>Aperol Apritz</li>
-            <li>Maçã e Uva</li>
-            <li>Morango Kiwi</li>
-            <li>Água de Coco</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div class="product-section" id="product-container"></div>
 
-    <!-- Botão WhatsApp -->
     <a
-      href="https://wa.me/seunumerodetelefone"
+      href="https://wa.me/+5561984160056"
       class="whatsapp-button"
       target="_blank"
     >
       <img src="./Assets/whatsapp-icon.png" alt="WhatsApp" />
     </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="scriptwaka.js"></script>
   </body>
 </html>
