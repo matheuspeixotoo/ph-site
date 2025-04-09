@@ -7,34 +7,14 @@
     <link rel="stylesheet" href="stylegeekbar.css" />
   </head>
   <body>
-    <!-- Logo Centralizada -->
     <div class="logo">
       <img id="phlogo" src="./Assets/phlogo.png" alt="Logo PH" />
     </div>
 
-    <!-- Título da Página -->
     <h1 class="page-title">Sabores Disponíveis - GEEK BAR</h1>
 
-    <!-- Lista de Produtos -->
-    <div class="product-container">
-      <!-- GEEK BAR PLUS 25MIL -->
-      <div class="product-card">
-        <img src="./Assets/geekbar25k.jpg" alt="GEEK BAR PLUS 25MIL" />
-        <div class="product-info">
-          <h2>GEEK BAR PLUS 25MIL - R$120,00</h2>
-          <ul>
-            <li>Morango Colada</li>
-            <li>Raspberry Peach Lime</li>
-            <li>Sour Straws</li>
-            <li>Strawberry B-pop</li>
-            <li>Sour Apple Ice</li>
-            <li>Miami Mint</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div class="product-section" id="product-container"></div>
 
-    <!-- Botão WhatsApp -->
     <a
       href="https://wa.me/+5561984160056"
       class="whatsapp-button"
@@ -42,5 +22,8 @@
     >
       <img src="./Assets/whatsapp-icon.png" alt="WhatsApp" />
     </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="scriptgeekbar.js"></script>
   </body>
 </html>
