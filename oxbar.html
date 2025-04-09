@@ -15,44 +15,8 @@
     <!-- Título da Página -->
     <h1 class="page-title">Sabores Disponíveis - OXBAR</h1>
 
-    <!-- Lista de Produtos -->
-    <div class="product-container">
-      <!-- OXBAR 30MIL -->
-      <div class="product-card">
-        <img src="./Assets/oxbar30k.jpg" alt="OXBAR 30MIL" />
-        <div class="product-info">
-          <h2>OXBAR 30MIL - R$130,00</h2>
-          <ul>
-            <li>Fruity Pebz</li>
-            <li>Kiwi Lime</li>
-            <li>Fab Fcuks</li>
-            <li>Pêssego Blue Razz</li>
-            <li>Melancia Mint</li>
-            <li>Double Apple</li>
-            <li>Morango Melancia Pêssego</li>
-            <li>Pina Colada</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- OXBAR 9MIL -->
-      <div class="product-card">
-        <img src="./Assets/oxbar9k.png" alt="OXBAR 9MIL" />
-        <div class="product-info">
-          <h2>OXBAR 9MIL - R$85,00</h2>
-          <ul>
-            <li>Apple Kiwi Ice</li>
-            <li>Ox Love</li>
-            <li>Cool Mint</li>
-            <li>Banana Ice</li>
-            <li>Fanta Grape</li>
-            <li>Blue Guava</li>
-            <li>Cola Ice</li>
-            <li>Cane Mint</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <!-- Lista de Produtos Dinâmica -->
+    <div class="product-section" id="product-container"></div>
 
     <!-- Botão WhatsApp -->
     <a
@@ -62,5 +26,9 @@
     >
       <img src="./Assets/whatsapp-icon.png" alt="WhatsApp" />
     </a>
+
+    <!-- Bibliotecas e Script JS -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="scriptoxbar.js"></script>
   </body>
 </html>
