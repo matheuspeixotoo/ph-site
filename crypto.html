@@ -7,35 +7,14 @@
     <link rel="stylesheet" href="stylecrypto.css" />
   </head>
   <body>
-    <!-- Logo Centralizada -->
     <div class="logo">
       <img id="phlogo" src="./Assets/phlogo.png" alt="Logo PH" />
     </div>
 
-    <!-- Título da Página -->
     <h1 class="page-title">Sabores Disponíveis - CRYPTO</h1>
 
-    <!-- Lista de Produtos -->
-    <div class="product-container">
-      <!-- CRYPTO 20MIL -->
-      <div class="product-card">
-        <img src="./Assets/crypto20k.png" alt="CRYPTO 20MIL" />
-        <div class="product-info">
-          <h2>CRYPTO 20MIL PUFFS - R$110,00</h2>
-          <ul>
-            <li>Star Blue Razz Ice</li>
-            <li>Fashion Mango</li>
-            <li>Peach Jungle</li>
-            <li>Manga, Pêssego e Melancia</li>
-            <li>Pink Strawberry Watermelon</li>
-            <li>Burning Grape Ice</li>
-            <li>Tiger Melon Ice</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div class="product-section" id="product-container"></div>
 
-    <!-- Botão WhatsApp -->
     <a
       href="https://wa.me/+5561984160056"
       class="whatsapp-button"
@@ -43,5 +22,8 @@
     >
       <img src="./Assets/whatsapp-icon.png" alt="WhatsApp" />
     </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="scriptcrypto.js"></script>
   </body>
 </html>
