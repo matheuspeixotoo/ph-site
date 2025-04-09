@@ -15,23 +15,8 @@
     <!-- Título da Página -->
     <h1 class="page-title">Sabores Disponíveis - HQD</h1>
 
-    <!-- Lista de Produtos -->
-    <div class="product-container">
-      <!-- HQD 5MIL -->
-      <div class="product-card">
-        <img src="./Assets/hqd5k.png" alt="HQD 5MIL" />
-        <div class="product-info">
-          <h2>HQD 5MIL - R$65,00</h2>
-          <ul>
-            <li>Melancia e Banana</li>
-            <li>Morango e Kiwi</li>
-            <li>Passion Fruit e Manga</li>
-            <li>Black Ice</li>
-            <li>Raspberry Cola</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <!-- Lista de Produtos Dinâmica -->
+    <div class="product-section" id="product-container"></div>
 
     <!-- Botão WhatsApp -->
     <a
@@ -41,5 +26,9 @@
     >
       <img src="./Assets/whatsapp-icon.png" alt="WhatsApp" />
     </a>
+
+    <!-- Bibliotecas e Script JS -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="scripthqd.js"></script>
   </body>
 </html>
