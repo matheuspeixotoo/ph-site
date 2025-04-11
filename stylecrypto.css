@@ -142,7 +142,9 @@ html,
 body {
   height: 100%;
   overflow-x: hidden;
-  overscroll-behavior: none;
-  touch-action: pan-y;
-  scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
+}
+
+body {
+  background-attachment: fixed;
 }

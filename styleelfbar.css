@@ -128,3 +128,28 @@ body {
   width: 120px;
   height: 120px;
 }
+
+@media (max-width: 768px) {
+  .product-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .product-card img {
+    margin-right: 0;
+    margin-bottom: 15px;
+    width: 180px;
+  }
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+}
+
+body {
+  background-attachment: fixed;
+}
