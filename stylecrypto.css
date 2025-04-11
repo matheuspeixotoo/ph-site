@@ -6,6 +6,7 @@
 }
 
 body {
+  height: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -30,14 +31,12 @@ body {
   width: 500px;
 }
 
-/* Título Principal */
 .page-title {
   font-size: 28px;
   font-weight: bold;
   margin: 20px 0;
 }
 
-/* Container dos Produtos */
 .product-container {
   display: flex;
   flex-direction: column;
@@ -47,7 +46,6 @@ body {
   padding: 20px;
 }
 
-/* Cartão de Produto */
 .product-card {
   display: flex;
   align-items: center;
@@ -67,7 +65,6 @@ body {
   transform: scale(1.03);
 }
 
-/* Imagem do Pod */
 .product-card img {
   width: 360px;
   height: auto;
@@ -75,7 +72,6 @@ body {
   border-radius: 10px;
 }
 
-/* Informações do Produto */
 .product-info {
   flex: 1;
 }
@@ -96,7 +92,6 @@ body {
   padding: 3px 0;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .product-card {
     flex-direction: column;
@@ -139,6 +134,15 @@ body {
   .product-card img {
     margin-right: 0;
     margin-bottom: 15px;
-    width: 180px; /* antes era 100px, agora ficou maior */
+    width: 180px;
   }
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  touch-action: pan-y;
+  scroll-behavior: smooth;
 }
