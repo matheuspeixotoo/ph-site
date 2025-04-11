@@ -7,7 +7,6 @@ fetch(spreadsheetURL)
     const data = Papa.parse(csvText, { header: true }).data;
     const container = document.getElementById("product-container");
 
-    // Agrupa por Produto + Preço + Imagem
     const produtos = {};
 
     data.forEach((item) => {

@@ -26,7 +26,6 @@ fetch(spreadsheetURL)
       }
     });
 
-    // Monta os cards
     Object.values(produtos).forEach((produto) => {
       const card = document.createElement("div");
       card.className = "product-card";
