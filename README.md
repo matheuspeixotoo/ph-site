@@ -1,4 +1,4 @@
-# Catálogo PH OFICIAL
+# Catálogo PH OFICIAL - PLANO PILOTO
 
 Site de catálogo de pods desenvolvido para facilitar a visualização dos produtos disponíveis, seus valores e sabores. Criado com foco em praticidade tanto para o cliente final quanto para o administrador do site.
 
@@ -41,6 +41,10 @@ O projeto é dividido por marcas e cada produto pode ser atualizado automaticame
 - Fácil manutenção para o cliente (não é necessário conhecimento técnico)
 - Otimizado para navegação rápida
 - Visual moderno e limpo
+
+---
+
+Esse site é destinado aos clientes do Plano Piloto.
 
 ---
 
