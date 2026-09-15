@@ -171,7 +171,7 @@
     header.innerHTML = `
       <div class="container">
         <a class="brand-link" href="index.html" aria-label="Over Pods, início">
-          <img class="brand-mark" src="Assets/logo_overpods_icon.png" alt="" aria-hidden="true" />
+          <img class="brand-mark" src="Assets/logo_overpods_icon.webp" alt="" aria-hidden="true" />
           <span class="brand-name">Over Pods</span>
         </a>
         <form class="search" role="search" onsubmit="return false">
@@ -256,7 +256,7 @@
     }
     return `<div class="photo">
       <img src="Assets/${esc(p.imagem)}" alt="${esc(p.nome)}" loading="lazy"
-           onerror="this.parentNode.classList.add('is-placeholder')" />
+           onerror="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.replace(/\.[a-z]+$/i,'.webp')}else{this.parentNode.classList.add('is-placeholder')}" />
       <span class="photo-caption">${cap}</span>${extra || ""}
     </div>`;
   }
@@ -347,7 +347,7 @@
             <a class="btn btn-lg" href="#lancamentos">Ver lançamentos</a>
           </div>
         </div>
-        <img class="hero-art" src="Assets/logo_overpods.png" alt="Over Pods" />
+        <img class="hero-art" src="Assets/logo_overpods.webp" alt="Over Pods" />
       </section>
 
       <section class="container section" id="lancamentos">

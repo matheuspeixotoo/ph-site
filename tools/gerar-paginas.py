@@ -23,7 +23,7 @@ TEMPLATE = """<!DOCTYPE html>
     <title>{title}</title>
     <meta name="description" content="{desc}" />
     <meta name="theme-color" content="#161826" />
-    <link rel="icon" type="image/png" href="Assets/logo_overpods_icon.png" />
+    <link rel="icon" type="image/png" href="Assets/logo_overpods_icon.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="styles.css" />
