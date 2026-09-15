@@ -3,27 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PH OFICIAL - THE BLACK SHEEP</title>
-    <link rel="stylesheet" href="styletbs.css" />
+    <title>The Black Sheep · Over Pods</title>
+    <meta name="description" content="The Black Sheep: modelos, preços e sabores em estoque. Pedidos pelo WhatsApp." />
+    <meta name="theme-color" content="#161826" />
+    <link rel="icon" type="image/png" href="Assets/logo_overpods_icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      // Age gate: decide antes da primeira pintura se o overlay aparece (aceite vale 30 dias).
+      try {
+        var t = +localStorage.getItem("ph_age_ok") || 0;
+        if (t && Date.now() - t < 30 * 24 * 60 * 60 * 1000) document.documentElement.classList.add("age-ok");
+      } catch (e) {}
+    </script>
   </head>
-  <body>
-    <div class="logo">
-      <img id="phlogo" src="./Assets/phlogo.png" alt="Logo PH" />
+  <body data-page="brand" data-brand="tbs">
+    <div id="gate" class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+      <div class="gate-dialog">
+        <span class="kicker">Verificação de idade</span>
+        <h2 id="gate-title">Você tem 18 anos ou mais?</h2>
+        <p>Este catálogo exibe produtos que contêm nicotina. A venda é proibida para menores de 18 anos.</p>
+        <div class="gate-actions">
+          <button type="button" class="btn btn-primary" data-gate-yes>Sim, tenho 18 anos ou mais</button>
+          <button type="button" class="btn btn-secondary" data-gate-no>Sou menor de 18 anos</button>
+        </div>
+      </div>
     </div>
 
-    <h1 class="page-title">Sabores Disponíveis - THE BLACK SHEEP</h1>
-
-    <div class="product-section" id="product-container"></div>
-
-    <a
-      href="https://wa.me/+5561984160056"
-      class="whatsapp-button"
-      target="_blank"
-    >
-      <img src="./Assets/whatsapp-icon.png" alt="WhatsApp" />
-    </a>
+    <header id="site-header" class="site-header"></header>
+    <main id="main"></main>
+    <footer id="site-footer" class="site-footer"></footer>
 
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-    <script src="scripttbs.js"></script>
+    <script src="catalogo.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

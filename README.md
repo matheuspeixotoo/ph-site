@@ -1,54 +1,60 @@
-# Catálogo PH OFICIAL - PLANO PILOTO
+# Catálogo Over Pods — redesign
 
-Site de catálogo de pods desenvolvido para facilitar a visualização dos produtos disponíveis, seus valores e sabores. Criado com foco em praticidade tanto para o cliente final quanto para o administrador do site.
-
-## 🌐 Acesse o site
+Site de catálogo de pods, essências e acessórios. Pedidos fechados pelo WhatsApp, sem carrinho nem pagamento.
 
 🔗 [www.phpods.com.br](https://www.phpods.com.br)
 
 ---
 
-## 🧾 Funcionalidades
+## Como funciona
 
-- Catálogo completo com marcas, modelos, preços e sabores
-- Integração com **Google Sheets** para atualização dinâmica:
-  - Inclusão e remoção de sabores
-  - Atualização de preços
-  - Adição ou exclusão de produtos
-- Layout responsivo para **PC e Mobile**
-- Animações de expansão em **cards e botões** ao passar o mouse
-- Botão flutuante do **WhatsApp** direcionando para contato direto com o vendedor
+- **Não existe banco de dados.** Todo o catálogo (produtos, preços, fotos e sabores) vem de uma planilha do Google publicada na web em CSV, exatamente como na versão anterior do site. O dono da loja continua editando só a planilha.
+- **Uma aba da planilha por marca.** Cada aba tem as colunas `Marca`, `Produto`, `Preço`, `Imagem`, `Sabor`. Os sabores vão na mesma célula, separados por vírgula ou quebra de linha.
+- **A aba NOVIDADES alimenta a home.** Os três primeiros produtos dela viram os cards de "Lançamentos", e qualquer produto que também esteja nela ganha o selo **Novo** na página da marca e o filtro "Lançamentos".
+- **Fotos** ficam em `Assets/` e a planilha referencia só o nome do arquivo (ex.: `elfbar40k.jpg`). Se a foto não existir, o card mostra um placeholder em vez de imagem quebrada.
+- **Age gate** (18+) aparece antes de qualquer conteúdo e o aceite vale 30 dias no navegador.
+- **Busca** no cabeçalho procura em todas as marcas por sabor, modelo ou marca e mostra só os sabores que batem com o termo.
+- **Cada sabor é um link** que abre o WhatsApp com a mensagem pronta ("Olá! Quero o ELFBAR 40MIL sabor Grape Ice.").
 
----
+## Estrutura
 
-## 🛠️ Tecnologias Utilizadas
+```
+index.html          home (lançamentos, marcas, essências e acessórios)
+<marca>.html        uma página por marca — mesmos nomes de arquivo do site antigo,
+                    então os links já divulgados continuam valendo
+catalogo.js         CONFIGURAÇÃO: número do WhatsApp, planilha, lista de marcas e gids
+app.js              aplicação (carrega a planilha, renderiza, busca, filtros, age gate)
+styles.css          tokens e componentes (design system Nocturne)
+tools/gerar-paginas.py  gera index.html e as páginas de marca a partir de catalogo.js
+Assets/             fotos de produto, logos das marcas, banner
+CNAME               domínio do GitHub Pages
+```
 
-- **HTML5**
-- **CSS3**
-- **JavaScript (Vanilla)**
-- **Google Sheets API** (via publicação em HTML)
+## Testar no computador
 
----
+Abrir o `index.html` com dois cliques **não carrega o catálogo**: no endereço `file://` o Google bloqueia a leitura da planilha (o site antigo tem a mesma limitação). Dê dois cliques em `tools/servir.bat`, que sobe um servidor local e abre `http://localhost:8000`. No GitHub Pages funciona normalmente.
 
-## 📁 Estrutura
+## Tarefas comuns
 
-O projeto é dividido por marcas e cada produto pode ser atualizado automaticamente a partir da planilha. O código está estruturado para permitir fácil duplicação e adaptação para diferentes lojas e catálogos.
+**Trocar o número do WhatsApp ou as mensagens prontas** → edite `catalogo.js`.
 
----
+**Adicionar uma marca**
+1. Crie a aba na planilha (mesmas colunas) e publique.
+2. Pegue o `gid` da aba na URL da planilha.
+3. Adicione a marca em `catalogo.js` (slug, nome, gid, logo, tipo `pod` ou `extra`).
+4. Coloque o logo em `Assets/` (PNG com fundo transparente; ele é exibido em monocromático claro).
+5. Rode `python tools/gerar-paginas.py` para criar a página `slug.html`.
 
-## ✨ Destaques
+**Remover uma marca** → apague a entrada em `catalogo.js`, rode o gerador e apague o `.html` antigo.
 
-- Fácil manutenção para o cliente (não é necessário conhecimento técnico)
-- Otimizado para navegação rápida
-- Visual moderno e limpo
+**Trocar o banner de aviso** → substitua `Assets/banner.jpeg` (ou mude o nome em `catalogo.js`; deixe `""` para desativar).
 
----
+**Horário de atendimento no rodapé** → preencha `horario` em `catalogo.js`.
 
-Esse site é destinado aos clientes do Plano Piloto.
+## Tecnologias
 
----
+HTML, CSS e JavaScript puros. A única dependência externa é o [PapaParse](https://www.papaparse.com/) (leitura do CSV), via CDN, e a fonte Inter do Google Fonts. Sem build, sem framework: basta publicar a pasta no GitHub Pages.
 
-## 👨‍💻 Autor
+## Autor
 
-Desenvolvido por [Matheus Peixoto](https://github.com/matheuspeixotoo)
-
+Desenvolvido por [Matheus Peixoto](https://github.com/matheuspeixotoo).

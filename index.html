@@ -3,97 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PH OFICIAL</title>
-    <link rel="stylesheet" href="stylepp.css" />
-  </head>
-  <body>
-    <div class="logo">
-      <img id="phlogo" src="./Assets/phlogo.png" alt="Logo PH" />
-    </div>
-
-    <div class="button-container">
-      <a href="novidades.html" class="button">
-        <img src="./Assets/novidades.png" alt="NOVIDADES" />NOVIDADES
-      </a>
-      <a href="elfbar.html" class="button">
-        <img src="./Assets/elfbar.png" alt="ELFBAR" />ELFBAR
-      </a>
-      <a href="ignite.html" class="button">
-        <img src="./Assets/ignite.png" alt="IGNITE" />IGNITE
-      </a>
-      <a href="lostmary.html" class="button">
-        <img src="./Assets/lostmary.png" alt="LOST MARY" />LOST MARY
-      </a>
-      <a href="oxbar.html" class="button">
-        <img src="./Assets/oxbar.png" alt="OXBAR" />OXBAR
-      </a>
-      <a href="hqd.html" class="button">
-        <img src="./Assets/hqd.png" alt="HQD" />HQD
-      </a>
-      <a href="nikbar.html" class="button">
-        <img src="./Assets/nikbar.png" alt="NIKBAR" />NIKBAR
-      </a>
-      <a href="dinnerlady.html" class="button">
-        <img src="./Assets/dinnerlady.png" alt="DINNER LADY" />DINNER LADY
-      </a>
-      <a href="tbs.html" class="button">
-        <img src="./Assets/tbs.png" alt="THE BLACK SHEEP" />THE BLACK SHEEP
-      </a>
-      <a href="maskking.html" class="button">
-        <img src="./Assets/maskking.png" alt="MASKKING" />MASKKING
-      </a>
-      <a href="waka.html" class="button">
-        <img src="./Assets/waka.png" alt="WAKA" />WAKA
-      </a>
-      <a href="lifepod.html" class="button">
-        <img src="./Assets/lifepod.png" alt="LIFE POD" />LIFE POD
-      </a>
-      <a href="geekbar.html" class="button">
-        <img src="./Assets/geekbar.png" alt="GEEK BAR" />GEEK BAR
-      </a>
-      <a href="sexaddict.html" class="button">
-        <img src="./Assets/sexaddict.png" alt="GEEK BAR" />SEX ADDICT
-      </a>
-      <a href="refis.html" class="button">
-        <img src="./Assets/refis.png" alt="REFIS" />REFIS
-      </a>
-      <a href="nicsalt.html" class="button">
-        <img src="./Assets/nicsalt.png" alt="NICSALT" />NICSALT
-      </a>
-      <a href="juice.html" class="button">
-        <img src="./Assets/juice.png" alt="JUICE" />JUICE
-      </a>
-      <a href="balas.html" class="button">
-        <img src="./Assets/balas.png" alt="BALAS" />BALAS
-      </a>
-    </div>
-
-    <a
-      href="https://wa.me/+5561984160056"
-      class="whatsapp-button"
-      target="_blank"
-    >
-      <img src="./Assets/whatsapp-icon.png" alt="WhatsApp" />
-    </a>
+    <title>Over Pods · Catálogo de pods e essências</title>
+    <meta name="description" content="Catálogo de pods, essências e acessórios. Pedidos pelo WhatsApp." />
+    <meta name="theme-color" content="#161826" />
+    <link rel="icon" type="image/png" href="Assets/logo_overpods_icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
     <script>
-      window.onload = function () {
-        let maiorDeIdade = confirm("Você é maior de 18 anos?");
-        if (!maiorDeIdade) {
-          alert("O acesso a este site é restrito para maiores de 18 anos.");
-          window.location.href = "https://www.google.com";
-        }
-      };
+      // Age gate: decide antes da primeira pintura se o overlay aparece (aceite vale 30 dias).
+      try {
+        var t = +localStorage.getItem("ph_age_ok") || 0;
+        if (t && Date.now() - t < 30 * 24 * 60 * 60 * 1000) document.documentElement.classList.add("age-ok");
+      } catch (e) {}
     </script>
-
-    <div id="banner-popup" class="banner-overlay" style="display: none">
-      <div class="banner-container">
-        <div class="banner-modal">
-          <img src="./Assets/banner.jpeg" alt="Banner PH" class="banner-img" />
+  </head>
+  <body data-page="home">
+    <div id="gate" class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+      <div class="gate-dialog">
+        <span class="kicker">Verificação de idade</span>
+        <h2 id="gate-title">Você tem 18 anos ou mais?</h2>
+        <p>Este catálogo exibe produtos que contêm nicotina. A venda é proibida para menores de 18 anos.</p>
+        <div class="gate-actions">
+          <button type="button" class="btn btn-primary" data-gate-yes>Sim, tenho 18 anos ou mais</button>
+          <button type="button" class="btn btn-secondary" data-gate-no>Sou menor de 18 anos</button>
         </div>
-        <button onclick="fecharBanner()" class="fechar-btn">FECHAR</button>
       </div>
     </div>
 
-    <script src="scriptindex.js"></script>
+    <header id="site-header" class="site-header"></header>
+    <main id="main"></main>
+    <footer id="site-footer" class="site-footer"></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="catalogo.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
