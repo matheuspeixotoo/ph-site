@@ -352,18 +352,27 @@ html.age-ok .gate { display: none; }
 .wa-fab svg { width: 26px; height: 26px; }
 .wa-fab:hover { background: var(--tint-hover); color: var(--color-accent-300); }
 
-/* — banner de aviso (uma vez por sessão) — */
-.banner {
+/* — aviso de garantia (diálogo em texto, uma vez por sessão) — */
+.aviso {
   position: fixed; inset: 0; z-index: 80; background: rgba(15, 16, 26, 0.92);
   display: flex; align-items: center; justify-content: center; padding: var(--space-8);
 }
-.banner[hidden] { display: none; }
-.banner-dialog {
-  width: 100%; max-width: 440px; background: var(--color-surface); border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg); padding: var(--space-4); animation: nFade 0.3s ease both;
-  display: flex; flex-direction: column; gap: var(--space-4);
+.aviso-dialog {
+  width: 100%; max-width: 440px; max-height: calc(100vh - 2 * var(--space-8)); overflow-y: auto;
+  background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+  padding: var(--space-8); animation: nFade 0.3s ease both;
 }
-.banner-dialog img { width: 100%; max-height: 70vh; object-fit: contain; border-radius: var(--radius-md); }
+.aviso-dialog .kicker { display: block; margin-bottom: var(--space-4); }
+.aviso-dialog h2 { font-size: 25px; line-height: 1.12; letter-spacing: -0.015em; margin-bottom: var(--space-6); }
+.aviso-lista { margin: 0 0 var(--space-6); padding-left: 1.4em; display: flex; flex-direction: column; gap: var(--space-3); }
+.aviso-lista li { font-size: 14px; color: var(--color-neutral-200); padding-left: var(--space-1); }
+.aviso-lista li::marker { color: var(--color-accent-400); font-weight: 500; }
+.aviso-destaque {
+  font-size: 13px; font-weight: 500; color: var(--color-accent-300);
+  border: 1px solid var(--color-accent-700); background: rgba(66, 58, 106, 0.35);
+  border-radius: var(--radius-md); padding: var(--space-4) var(--space-6); margin-bottom: var(--space-6);
+}
+.aviso-dialog .btn { width: 100%; padding: var(--space-4) var(--space-6); }
 
 /* — mobile — */
 @media (max-width: 640px) {

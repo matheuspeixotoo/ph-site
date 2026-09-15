@@ -197,6 +197,7 @@
         <div>
           <div class="footer-label">Aviso legal</div>
           <p>Produto destinado a maiores de 18 anos. Contém nicotina, substância que causa dependência.</p>
+          ${CFG.aviso && CFG.aviso.titulo ? `<a href="#garantia" data-abrir-aviso>Garantia e trocas</a>` : ""}
         </div>
       </div>`;
 
@@ -208,6 +209,9 @@
     fab.setAttribute("aria-label", "Falar no WhatsApp");
     fab.innerHTML = ICON.whatsapp;
     document.body.appendChild(fab);
+
+    const linkAviso = document.querySelector("[data-abrir-aviso]");
+    if (linkAviso) linkAviso.addEventListener("click", (e) => { e.preventDefault(); showAviso(true); });
   }
 
   /* ---------- age gate ---------- */
@@ -230,23 +234,41 @@
     });
   }
 
-  function maybeShowBanner() {
-    if (page !== "home" || !CFG.banner) return;
-    try { if (sessionStorage.getItem("ph_banner_seen")) return; } catch (_) { /* segue */ }
+  // Diálogo de garantia (texto vem de catalogo.js). `force` = aberto pelo link do rodapé.
+  function showAviso(force) {
+    const av = CFG.aviso;
+    if (!av || !av.titulo) return;
+    if (!force) {
+      if (page !== "home") return;
+      try { if (sessionStorage.getItem("ph_aviso_visto")) return; } catch (_) { /* segue */ }
+    }
+    if (document.querySelector(".aviso")) return;
     const el = document.createElement("div");
-    el.className = "banner";
+    el.className = "aviso";
     el.setAttribute("role", "dialog");
-    el.setAttribute("aria-label", "Aviso");
+    el.setAttribute("aria-modal", "true");
+    el.setAttribute("aria-labelledby", "aviso-titulo");
     el.innerHTML = `
-      <div class="banner-dialog">
-        <img src="Assets/${esc(CFG.banner)}" alt="Aviso da loja" />
-        <button type="button" class="btn btn-primary" data-close>Fechar</button>
+      <div class="aviso-dialog">
+        <span class="kicker">Antes de pedir</span>
+        <h2 id="aviso-titulo">${esc(av.titulo)}</h2>
+        <ol class="aviso-lista">${(av.itens || []).map((t) => `<li>${esc(t)}</li>`).join("")}</ol>
+        ${av.destaque ? `<p class="aviso-destaque">${esc(av.destaque)}</p>` : ""}
+        <button type="button" class="btn btn-primary" data-close>${esc(av.botao || "Entendi")}</button>
       </div>`;
-    const close = () => { el.remove(); try { sessionStorage.setItem("ph_banner_seen", "1"); } catch (_) { /* segue */ } };
+    const close = () => {
+      el.remove();
+      document.removeEventListener("keydown", onKey);
+      try { sessionStorage.setItem("ph_aviso_visto", "1"); } catch (_) { /* segue */ }
+    };
+    const onKey = (e) => { if (e.key === "Escape") close(); };
     el.querySelector("[data-close]").addEventListener("click", close);
     el.addEventListener("click", (e) => { if (e.target === el) close(); });
+    document.addEventListener("keydown", onKey);
     document.body.appendChild(el);
+    el.querySelector("[data-close]").focus();
   }
+  const maybeShowBanner = () => showAviso(false);
 
   /* ---------- componentes ---------- */
   function photoHtml(p, extra) {

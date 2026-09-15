@@ -61,6 +61,16 @@ window.PH_CONFIG = {
       descricao: "Balas de nicotina." },
   ],
 
-  // Banner de aviso exibido uma vez por sessão na home (deixe "" para desativar).
-  banner: "banner.webp",
+  // Aviso de garantia: aparece uma vez por sessão na home e fica no link
+  // "Garantia e trocas" do rodapé. Deixe `titulo: ""` para desativar.
+  aviso: {
+    titulo: "Garantia dos produtos",
+    itens: [
+      "O prazo máximo para reclamação e troca é de 24 horas após o recebimento do produto.",
+      "Em caso de devolução por defeito, o produto precisa estar na embalagem original, sem marcas de queda, água ou sujeira e sem riscos, amassados ou rasgos na embalagem. Fora dessas condições não aceitamos a troca.",
+      "Não efetuamos devolução do dinheiro em caso de troca ou insatisfação.",
+    ],
+    destaque: "Produtos só serão trocados por defeito de fábrica. Não aceitamos troca por insatisfação de sabor.",
+    botao: "Entendi",
+  },
 };
